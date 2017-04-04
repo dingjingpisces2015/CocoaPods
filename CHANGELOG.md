@@ -8,6 +8,60 @@ To install release candidates run `[sudo] gem install cocoapods --pre`
 
 ##### Enhancements
 
+* None.  
+
+##### Bug Fixes
+
+* Fix generating `LD_RUNPATH_SEARCH_PATHS` without `use_frameworks!` but consuming a vendored dynamic artifact.  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6596](https://github.com/CocoaPods/CocoaPods/issues/6596)
+
+* Fix building with static lib subprojects (previously only supported framework subprojects).  
+  [Ben Asher](https://github.com/benasher44)
+  [#5830](https://github.com/CocoaPods/CocoaPods/issues/5830)
+  [#6306](https://github.com/CocoaPods/CocoaPods/issues/6306)
+
+* Fix regression from #6457 to ensure a correct error message is given when a spec is not found.  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6457](https://github.com/CocoaPods/CocoaPods/issues/6457)
+
+* Provide a better error message if a podspec is found but cannot be parsed.  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6457](https://github.com/CocoaPods/CocoaPods/issues/6457)
+
+* Only share pod target xcscheme if present during validation.  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6558](https://github.com/CocoaPods/CocoaPods/pull/6558)
+
+* Properly compile storyboard for watch device family.  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6516](https://github.com/CocoaPods/CocoaPods/issues/6516)
+
+* Support git progress for `pod repo update` and `pod install --repo-update`  
+  [Alfredo Delli Bovi](https://github.com/adellibovi)
+  [#6525](https://github.com/CocoaPods/CocoaPods/issues/6525)
+
+* Return new exit code (31) when spec not found  
+  [Alfredo Delli Bovi](https://github.com/adellibovi)
+  [#6033](https://github.com/CocoaPods/CocoaPods/issues/6033)
+
+* Provide better error message when spec not found  
+  [Alfredo Delli Bovi](https://github.com/adellibovi)
+  [#6033](https://github.com/CocoaPods/CocoaPods/issues/6033)
+
+
+## 1.2.1.beta.1 (2017-03-08)
+
+##### Enhancements
+
+* Use red text when pod installation fails 
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6534](https://github.com/CocoaPods/CocoaPods/issues/6534)
+  
+* Provide installation option to disable multiple pod sources warnings.  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6497](https://github.com/CocoaPods/CocoaPods/pull/6497)
+
 * Use the colored2 gem instead of colored.  
   [Orta Therox](https://github.com/orta)
   [xcodeproj#463](https://github.com/CocoaPods/Xcodeproj/pull/463)
@@ -16,7 +70,20 @@ To install release candidates run `[sudo] gem install cocoapods --pre`
   [Ken Wigginton](https://github.com/hailstorm350)
   [#6434](https://github.com/CocoaPods/CocoaPods/pull/6434)
 
+* Created `NOMENCLATURE.md` to keep a glossary of the most common terms used in cocoapods.
+  [Rob Contreras](https://github.com/robcontreras)
+  [#2379](https://github.com/CocoaPods/CocoaPods/pull/2379)
+
+  
+* Only resave changed pod configure file to impove compile speed after pod intall.
+  [dingjingpisces2015](https://github.com/dingjingpisces2015)
+  [#1](https://github.com/dingjingpisces2015/CocoaPods/pull/1)
+  
 ##### Bug Fixes
+
+* Ensure Core Data models get added to the compile sources phase for header generation.  
+  [Ben Asher](https://github.com/benasher44)
+  [#6259](https://github.com/CocoaPods/CocoaPods/issues/6259)
 
 * Do not crash when attempting to install pod with no supported targets.  
   [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
@@ -57,6 +124,9 @@ To install release candidates run `[sudo] gem install cocoapods --pre`
   [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
   [#5670](https://github.com/CocoaPods/CocoaPods/issues/5670)
 
+* Updated the colored2 gem (previous version removed from rubygems.org).  
+  [Ben Asher](https://github.com/benasher44)
+  [#6533](https://github.com/CocoaPods/CocoaPods/pull/6533)
 
 ## 1.2.0 (2017-01-28)
 

@@ -67,7 +67,7 @@ module Pod
 
       it 'does not update unused sources' do
         @analyzer.stubs(:sources).returns(config.sources_manager.master)
-        config.sources_manager.expects(:update).once.with('master')
+        config.sources_manager.expects(:update).once.with('master', true)
         @analyzer.update_repositories
       end
 
@@ -124,7 +124,7 @@ module Pod
         source.stubs(:repo).returns('/repo/cache/path')
         config.sources_manager.expects(:find_or_create_source_with_url).with(repo_url).returns(source)
         source.stubs(:git?).returns(true)
-        config.sources_manager.expects(:update).once.with(source.name)
+        config.sources_manager.expects(:update).once.with(source.name, true)
 
         analyzer = Pod::Installer::Analyzer.new(config.sandbox, podfile, nil)
         analyzer.update_repositories
@@ -757,7 +757,31 @@ module Pod
               pod 'JSONKit'
             end
 
-            target 'Sample Framework' do
+            target 'SampleFramework' do
+              project 'SampleProject/Sample Lib/Sample Lib'
+              pod 'monkey'
+            end
+          end
+          analyzer = Pod::Installer::Analyzer.new(config.sandbox, podfile)
+          result = analyzer.analyze
+
+          result.targets.select { |at| at.name == 'Pods-SampleProject' }.flat_map(&:pod_targets).map(&:name).sort.uniq.should == %w(
+            JSONKit
+            monkey
+          ).sort
+        end
+
+        it "copy a static library's pod target, when the static library is in a sub project" do
+          podfile = Pod::Podfile.new do
+            source SpecHelper.test_repo_url
+            platform :ios, '8.0'
+            project 'SampleProject/SampleProject'
+
+            target 'SampleProject' do
+              pod 'JSONKit'
+            end
+
+            target 'SampleLib' do
               project 'SampleProject/Sample Lib/Sample Lib'
               pod 'monkey'
             end
@@ -793,7 +817,7 @@ module Pod
             source SpecHelper.test_repo_url
             use_frameworks!
             platform :ios, '8.0'
-            target 'Sample Framework' do
+            target 'SampleFramework' do
               project 'SampleProject/Sample Lib/Sample Lib'
               pod 'monkey'
             end
